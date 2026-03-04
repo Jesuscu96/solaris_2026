@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DNA Pairing</title>
+    <script>
+        function pairElement(str) {
+            const convertStrArray = str.split("");
+            const combinations = {
+                "C": "G",
+                "G": "C",
+                "A": "T",
+                "T": "A"
+            };
+
+            const convertArray2d = convertStrArray.reduce((acc, elem)=> {
+                acc = [...acc, [elem, combinations[elem]]]
+                return acc
+            },[])
+            return convertArray2d;            
+        }
+
+        console.log(pairElement("GCG"));
+    </script>
+</head>
+
+<body>
+
+</body>
+
+</html>

@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Spinal case</title>
+    <script>
+        function spinalCase(str) {
+            
+            const newStr = str.trim().split(/[\s_]+|(?=[A-Z])/);
+
+            const newStr3 = newStr.reduce((acc, elem, indi) => {
+                
+                if ((newStr.length -1 )> indi) {
+                    elem = elem.trim() + "-"
+                }              
+                acc = [...acc, ...elem];
+                return acc;
+            }, []).join("");            
+            return newStr3.trim().toLowerCase();
+        }
+
+        //spinalCase('This_Is Spinal Tap');
+        console.log(spinalCase('AllThe-small Things'));
+        
+    </script>
+</head>
+
+<body>
+
+</body>
+
+</html>

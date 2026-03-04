@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Missing letters</title>
+    <script>
+        function fearNotLetter(str) {
+
+            const alphabet = "abcdefghijklmnopqrstuvwxyz"; 
+            const strArray = str.split("");
+            const alphabetArray = alphabet.split("");
+            const alphabetArraySearchIndexInitial = alphabetArray.findIndex(l => l === strArray[0]);
+            const alphabetArraySearchIndexLast = alphabetArray.findIndex(l => l === strArray[strArray.length -1]);
+            const allLettersContainingStr = alphabetArray.slice(alphabetArraySearchIndexInitial, alphabetArraySearchIndexLast +1);
+            const searchLetter = allLettersContainingStr.filter(l => !strArray.includes(l));
+            
+            if(!searchLetter.toString()) return;
+            return searchLetter.toString();
+        }
+
+        
+        console.log(fearNotLetter("abcdefghijklmnopqrstuvwxyz"));
+        
+    </script>
+</head>
+
+<body>
+
+</body>
+
+</html>

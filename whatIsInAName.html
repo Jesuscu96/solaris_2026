@@ -7,21 +7,18 @@
     <title>whatIsInAName</title>
     <script>
         function whatIsInAName(collection, source) {
-            
-            const newCollection = Object.values(collection).filter((elem) => {
-                if((elem === source.first) || (elem.last === source.last)) {
-                    if ((elem.first !== null) && (elem.last !== null)) return true;
-                } 
-                
-                
-                return false;
+            const newSource = Object.keys(source);
+            const newCollection = collection.filter((elem) => {
+                return newSource.every(c => elem[c] === source[c])
             });
             return newCollection;
+
+
         }
 
         whatIsInAName([{ first: "Romeo", last: "Montague" }, { first: "Mercutio", last: null }, { first: "Tybalt", last: "Capulet" }], { last: "Capulet" });
         console.log(whatIsInAName([{ first: "Romeo", last: "Montague" }, { first: "Mercutio", last: null }, { first: "Tybalt", last: "Capulet" }], { last: "Capulet" }));
-        
+
     </script>
 </head>
 

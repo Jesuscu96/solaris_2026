@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>pig latin</title>
+    <script>
+        function translatePigLatin(str) {
+
+            const regexA = /[aeiouáéíóúüAEIOUÁÉÍÓÚÜ]/; //vocal
+            const regexB = /^[bcdfghjklmnpqrstvwxyz]$/i; // constante
+            
+            const copyStrSplit = str.trim().split("");
+            const totalConsonant = copyStrSplit.findIndex(l => regexA.test(l));
+            const initialConsonants = str.split("", totalConsonant).join("");
+            
+
+            if (totalConsonant > 0) {
+                const copyStrConcat = copyStrSplit.reduce((acc, elem, indi) => {
+
+                    if (regexA.test(elem) || indi >= totalConsonant) {
+                        acc = [...acc, elem];
+                    } else if (indi > totalConsonant) {
+                        acc = [...acc, elem];
+                    }
+                    return acc;
+
+                }, []).join("");
+                const finish = copyStrConcat + initialConsonants + "ay";
+                return finish;
+            }  
+            else if (totalConsonant == 0) {
+                const strPlasWay = str + "way";
+                return strPlasWay;
+            }     
+            else {
+                const strPlasWay = str + "way";
+                return strPlasWay;
+            }
+        }
+        console.log(translatePigLatin("rhythm"));
+
+    </script>
+</head>
+
+<body>
+
+</body>
+
+</html>

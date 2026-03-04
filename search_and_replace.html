@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Search and Replace</title>
+    <script>
+        function myReplace(str, before, after) {
+            const arrayAllWords = str.split(" ");
+
+            const replaceWord = arrayAllWords.map(w => {
+                if (w.charAt(0) === w.charAt(0).toUpperCase() && w === before) {
+                    w = after.charAt(0).toUpperCase() + after.substring(1).toLowerCase();
+                }
+                else if (w.charAt(0) === w.charAt(0).toLowerCase() && w === before) {
+                    w = after.toLowerCase();
+                }
+                else if (w === before) {
+                    w = after;
+                }
+                return w
+            });
+            return replaceWord.join(" ");
+        }
+
+        console.log(myReplace("He is Sleeping on the couch", "Sleeping", "sitting"));
+    </script>
+</head>
+
+<body>
+
+</body>
+
+</html>

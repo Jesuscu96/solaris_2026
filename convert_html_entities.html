@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Convert HTML Entities</title>
+    <script>
+        function convertHTML(str) {
+            const strArray = str.split("")
+            const charactersArray = ["&", "<", ">", '"', "'", ]
+            const charactersObject = 
+            {
+                "&": "&amp;",
+                "<": "&lt;",    
+                ">": "&gt;",
+                '"': "&quot;",  
+                "'": "&apos;",
+                "<>": "&lt;&gt;"
+            };
+            
+            function searchCharacters (letter) {
+                const searchCharacter = charactersArray.find(l => letter === l);
+                return(searchCharacter);
+            }
+            
+            const convertStr = strArray.map(l => {            
+                if (searchCharacters(l)) return l = charactersObject[l];
+                return l;
+            }).join("").trim()
+            return convertStr;           
+        }
+        console.log(convertHTML('Stuff in "quotation marks"'));
+        
+    </script>
+</head>
+
+<body>
+
+</body>
+
+</html>
