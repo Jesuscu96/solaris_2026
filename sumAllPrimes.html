@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sum All Primes</title>
+    <script>
+        function sumPrimes(num) {
+
+            const arrayNumbers = (num, acc = [...acc]) => {
+                const subtraction = num - 1;
+                if (subtraction > 0) {
+                    return arrayNumbers(subtraction, [...acc, subtraction]);
+                }
+                else {
+                    return acc;
+                }
+            }
+
+            //arrayNumbers(num -1, []);
+            console.log(arrayNumbers(num, []));
+            const resultArraynumbers = arrayNumbers(num, []).reduce((acc, elem) => acc * elem) + 1;
+            const sumNumPrimes = (num +1, acc = [...acc]) => {
+                const subtraction = num - 1;
+                if (Number.isInteger(arrayNumbers(subtraction, []).reduce((acc, elem) => acc * elem) + 1)) {
+                    if (subtraction > 0) {
+                        return sumNumPrimes(subtraction, [...acc, subtraction]);
+                    }
+                    else {
+                        return acc;
+                    }
+                }
+                else {
+                    return sumNumPrimes(subtraction, [...acc]);
+                }
+            }
+
+            if (Number.isInteger(resultArraynumbers)) {
+                
+            }
+
+        }
+
+        sumPrimes(11);
+    </script>
+</head>
+
+<body>
+
+</body>
+
+</html>

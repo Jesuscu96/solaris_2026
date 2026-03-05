@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sum All Odd Fibonacci Numbers</title>
+    <script>
+        function sumFibs(num) {
+            if (num === 1) return 1;
+            const fibonacci = Array.from({ length: num + 1 });
+
+
+
+            const arrayFibo = fibonacci.reduce((acc, _, i) => {
+                //[...acc, i < 2 ? i : acc[i - 1] + acc[i - 2]],
+                if (i < 2) {
+                    acc = [...acc, i];
+                }
+                else {
+                    acc = [...acc, acc[i - 1] + acc[i - 2]];
+                }
+                return acc;
+            }, []).filter(n => n % 2 !== 0 && n <= num).reduce((acc, elem) => acc += elem)
+            return arrayFibo;
+
+
+        }
+        console.log(sumFibs(1000));
+
+    </script>
+</head>
+
+<body>
+
+</body>
+
+</html>
