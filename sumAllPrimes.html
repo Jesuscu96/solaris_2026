@@ -8,7 +8,53 @@
     <script>
         function sumPrimes(num) {
 
-            const arrayNumbers = (num, acc = [...acc]) => {
+            const arrayNumbersIsPrime = (num, acc = [...acc]) => {
+                const subtraction = num - 1;
+                if (subtraction > 0) {
+                    return arrayNumbersIsPrime(subtraction, [...acc, subtraction]);
+                }
+                else {
+                    return acc;
+                }
+            }
+            const descendingArrayOfNumbers = arrayNumbersIsPrime(num + 1, []);
+            const isPrime = (isPrimeNum) => {
+                const copyArrayNumbersIsPrime = arrayNumbersIsPrime(isPrimeNum, []) ;
+                //console.log(copyArrayNumbersIsPrime);
+                
+                /* const copy2ArrayNumbersIsPrime = copyArrayNumbersIsPrime.reduce((acc, elem) => { 
+                    console.log(`elem: ${elem}, acc: ${acc}`);                    
+                    return  acc * elem ;
+
+                }, 1)
+                console.log(copy2ArrayNumbersIsPrime); */
+                
+                if (Number.isInteger((arrayNumbersIsPrime(isPrimeNum, []).reduce((acc, elem) => acc * elem, 1) + 1) / isPrimeNum) && isPrimeNum > 1) return true;
+                return false;
+            }
+
+            const resultArraynumbers = descendingArrayOfNumbers.reduce((acc, elem) => {
+               
+                if (isPrime(elem)) {
+                    const prueba = elem + acc;
+                    //console.log(`elem: ${elem}, acc: ${prueba}`);
+                    return elem + acc;
+                }
+                else {
+                    //console.log(` not prime acc: ${acc}`);
+                    return acc;
+                }
+                
+                
+
+            }, 0)
+            return resultArraynumbers;
+
+
+
+            //console.log(arrayNumbersIsPrime(num, []));
+
+            /* const arrayNumbers = (num, acc = [...acc]) => {
                 const subtraction = num - 1;
                 if (subtraction > 0) {
                     return arrayNumbers(subtraction, [...acc, subtraction]);
@@ -16,14 +62,22 @@
                 else {
                     return acc;
                 }
-            }
+            } */
 
             //arrayNumbers(num -1, []);
-            console.log(arrayNumbers(num, []));
-            const resultArraynumbers = arrayNumbers(num, []).reduce((acc, elem) => acc * elem) + 1;
-            const sumNumPrimes = (num +1, acc = [...acc]) => {
+            //console.log(arrayNumbers(num, []));
+            //const resultArraynumbers =  
+            //const resultArraynumbers = arrayNumbers(num, []).reduce((acc, elem) => acc * elem) + 1;
+            /* const sumNumPrimes = (num, acc = [...acc]) => {
                 const subtraction = num - 1;
-                if (Number.isInteger(arrayNumbers(subtraction, []).reduce((acc, elem) => acc * elem) + 1)) {
+                console.log(subtraction);
+                //console.log(arrayNumbers(subtraction, []));
+                
+                const isPrime = arrayNumbers(subtraction, []).reduce((acc, elem) => acc * elem) + 1;
+                //const isPrime = arrayNumbers(subtraction, []);
+                console.log(isPrime);
+                
+                if (Number.isInteger(isPrime)) {
                     if (subtraction > 0) {
                         return sumNumPrimes(subtraction, [...acc, subtraction]);
                     }
@@ -31,18 +85,21 @@
                         return acc;
                     }
                 }
-                else {
+                else if (subtraction > 0) {
                     return sumNumPrimes(subtraction, [...acc]);
                 }
+                else {
+                    return acc;
+                }
             }
+            return sumNumPrimes(num + 1, []); */
 
-            if (Number.isInteger(resultArraynumbers)) {
-                
-            }
 
         }
 
-        sumPrimes(11);
+        //sumPrimes(11);
+        console.log(sumPrimes(977));
+
     </script>
 </head>
 
