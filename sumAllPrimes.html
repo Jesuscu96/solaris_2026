@@ -19,22 +19,22 @@
             }
             const descendingArrayOfNumbers = arrayNumbersIsPrime(num + 1, []);
             const isPrime = (isPrimeNum) => {
-                const copyArrayNumbersIsPrime = arrayNumbersIsPrime(isPrimeNum, []) ;
+                const copyArrayNumbersIsPrime = arrayNumbersIsPrime(isPrimeNum, []);
                 //console.log(copyArrayNumbersIsPrime);
-                
+
                 /* const copy2ArrayNumbersIsPrime = copyArrayNumbersIsPrime.reduce((acc, elem) => { 
                     console.log(`elem: ${elem}, acc: ${acc}`);                    
                     return  acc * elem ;
 
                 }, 1)
                 console.log(copy2ArrayNumbersIsPrime); */
-                
+
                 if (Number.isInteger((arrayNumbersIsPrime(isPrimeNum, []).reduce((acc, elem) => acc * elem, 1) + 1) / isPrimeNum) && isPrimeNum > 1) return true;
                 return false;
             }
 
             const resultArraynumbers = descendingArrayOfNumbers.reduce((acc, elem) => {
-               
+
                 if (isPrime(elem)) {
                     const prueba = elem + acc;
                     //console.log(`elem: ${elem}, acc: ${prueba}`);
@@ -44,8 +44,8 @@
                     //console.log(` not prime acc: ${acc}`);
                     return acc;
                 }
-                
-                
+
+
 
             }, 0)
             return resultArraynumbers;
@@ -100,11 +100,34 @@
         //sumPrimes(11);
         console.log(sumPrimes(977));
 
+
+
     </script>
 </head>
 
 <body>
 
+    1. El Método Definitivo: Divisiones Sucesivas (Trial Division)
+    Es el método más seguro para números pequeños y medianos.
+    Regla: Un número
+    es primo si no es divisible por ningún número primo
+    tal que
+    .
+    Pasos:
+    Calcula la raíz cuadrada del número (
+    ).
+    Busca todos los números primos menores o iguales a esa raíz.
+    Divide
+    por cada uno de esos números primos.
+    Si ninguna división es exacta (resto 0), el número es primo.
+    Si alguna división es exacta, el número es compuesto.
+    Ejemplo (97):
+    . Primos menores que 9: 2, 3, 5, 7.
+    97/2 (No), 97/3 (No), 97/5 (No), 97/7 (No).
+    Resultado: 97 es primo.
+    Vedantu
+    Vedantu
+    +4
 </body>
 
 </html>
