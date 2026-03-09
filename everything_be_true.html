@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Everything Be True</title>
+    <script>
+        function truthCheck(collection, pre) {
+            const isTrue = collection.every(obj => obj[pre]);
+            return isTrue;
+        }
+
+        truthCheck([{ name: "Quincy", role: "Founder", isBot: false }, { name: "Naomi", role: "", isBot: false }, { name: "Camperbot", role: "Bot", isBot: true }], "isBot");
+    </script>
+</head>
+
+<body>
+
+</body>
+
+</html>
