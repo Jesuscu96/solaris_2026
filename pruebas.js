@@ -1,20 +1,20 @@
-function myReplace(str, before, after) {
-    const arrayAllWords = str.split(" ");
-    const searchWord = arrayAllWords.findIndex(w => w === before);
+function smallestCommons(arr) {
 
-    const replaceWord = arrayAllWords.map(w => {
-        if (w.charAt(0) === w.charAt(0).toUpperCase() && w === before) {
-            w = after.charAt(0).toUpperCase() + after.substring(1).toLowerCase();
-        }
-        else if (w.charAt(0) === w.charAt(0).toLowerCase() && w === before) {
-            w = afterafter.charAt(0).toLowerCase() + after.substring(1).toUpperCase();
-        }
-        else if (w === before) {
-            w = after;
-        }
-        return w
-    });
-    return replaceWord.join(" ");
+    const arrSort = [...arr].sort((a, b) => a - b);
+    const mcd = (a, b) => {
+        if (b <= 0) return a;
+        const division = a % b;
+        return mcd(b, division);
+    }
+
+    const mcm = (a, b) => (a * b) / mcd(a, b);
+
+    const numbersD = Array.from(
+        { length: arrSort[0] - arrSort[1] + 1 },
+        (_, i) => arrSort[0] + i
+    );
+
+    return numbersD.reduce((acc, val) => mcm(acc, val));
 }
 
-console.log(myReplace("He is Sleeping on the couch", "Sleeping", "sitting"));
+console.log(smallestCommons([1, 5])); 

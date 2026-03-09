@@ -8,126 +8,27 @@
     <script>
         function sumPrimes(num) {
 
-            const arrayNumbersIsPrime = (num, acc = [...acc]) => {
-                const subtraction = num - 1;
-                if (subtraction > 0) {
-                    return arrayNumbersIsPrime(subtraction, [...acc, subtraction]);
-                }
-                else {
-                    return acc;
-                }
-            }
-            const descendingArrayOfNumbers = arrayNumbersIsPrime(num + 1, []);
-            const isPrime = (isPrimeNum) => {
-                const copyArrayNumbersIsPrime = arrayNumbersIsPrime(isPrimeNum, []);
-                //console.log(copyArrayNumbersIsPrime);
+            const isPrime = (n, divisor = 2) => {
+                if (n < 2) return false;
+                if (divisor > Math.sqrt(n)) return true;
+                if (n % divisor === 0) return false;
+                return isPrime(n, divisor + 1);
+            };
 
-                /* const copy2ArrayNumbersIsPrime = copyArrayNumbersIsPrime.reduce((acc, elem) => { 
-                    console.log(`elem: ${elem}, acc: ${acc}`);                    
-                    return  acc * elem ;
+            const sumRecursive = (n, acc = 0) => {
+                if (n < 2) return acc;
+                return sumRecursive(n - 1, isPrime(n) ? acc + n : acc);
+            };
 
-                }, 1)
-                console.log(copy2ArrayNumbersIsPrime); */
-
-                if (Number.isInteger((arrayNumbersIsPrime(isPrimeNum, []).reduce((acc, elem) => acc * elem, 1) + 1) / isPrimeNum) && isPrimeNum > 1) return true;
-                return false;
-            }
-
-            const resultArraynumbers = descendingArrayOfNumbers.reduce((acc, elem) => {
-
-                if (isPrime(elem)) {
-                    const prueba = elem + acc;
-                    //console.log(`elem: ${elem}, acc: ${prueba}`);
-                    return elem + acc;
-                }
-                else {
-                    //console.log(` not prime acc: ${acc}`);
-                    return acc;
-                }
-
-
-
-            }, 0)
-            return resultArraynumbers;
-
-
-
-            //console.log(arrayNumbersIsPrime(num, []));
-
-            /* const arrayNumbers = (num, acc = [...acc]) => {
-                const subtraction = num - 1;
-                if (subtraction > 0) {
-                    return arrayNumbers(subtraction, [...acc, subtraction]);
-                }
-                else {
-                    return acc;
-                }
-            } */
-
-            //arrayNumbers(num -1, []);
-            //console.log(arrayNumbers(num, []));
-            //const resultArraynumbers =  
-            //const resultArraynumbers = arrayNumbers(num, []).reduce((acc, elem) => acc * elem) + 1;
-            /* const sumNumPrimes = (num, acc = [...acc]) => {
-                const subtraction = num - 1;
-                console.log(subtraction);
-                //console.log(arrayNumbers(subtraction, []));
-                
-                const isPrime = arrayNumbers(subtraction, []).reduce((acc, elem) => acc * elem) + 1;
-                //const isPrime = arrayNumbers(subtraction, []);
-                console.log(isPrime);
-                
-                if (Number.isInteger(isPrime)) {
-                    if (subtraction > 0) {
-                        return sumNumPrimes(subtraction, [...acc, subtraction]);
-                    }
-                    else {
-                        return acc;
-                    }
-                }
-                else if (subtraction > 0) {
-                    return sumNumPrimes(subtraction, [...acc]);
-                }
-                else {
-                    return acc;
-                }
-            }
-            return sumNumPrimes(num + 1, []); */
-
-
+            return sumRecursive(num);
         }
 
-        //sumPrimes(11);
+       
         console.log(sumPrimes(977));
-
-
-
     </script>
 </head>
 
 <body>
-
-    1. El Método Definitivo: Divisiones Sucesivas (Trial Division)
-    Es el método más seguro para números pequeños y medianos.
-    Regla: Un número
-    es primo si no es divisible por ningún número primo
-    tal que
-    .
-    Pasos:
-    Calcula la raíz cuadrada del número (
-    ).
-    Busca todos los números primos menores o iguales a esa raíz.
-    Divide
-    por cada uno de esos números primos.
-    Si ninguna división es exacta (resto 0), el número es primo.
-    Si alguna división es exacta, el número es compuesto.
-    Ejemplo (97):
-    . Primos menores que 9: 2, 3, 5, 7.
-    97/2 (No), 97/3 (No), 97/5 (No), 97/7 (No).
-    Resultado: 97 es primo.
-    Vedantu
-    Vedantu
-    +4
 </body>
 
 </html>

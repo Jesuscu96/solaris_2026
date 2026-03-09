@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Smallest Common Multiple</title>
+    <script>
+
+        function smallestCommons(arr) {
+            const arrOrder = [...arr].sort((a,b) => a - b);
+            
+            const a = arrOrder[0];
+            const b = arrOrder[1];
+            
+            const mcd = (a , b) => {
+                if (a <= 0) return b;
+                if (b <= 0) return a;
+                const division = a % b;
+                return mcd(b, division);
+            }
+            const mcm = a * (b / (mcd(a, b)));
+            console.log(mcd(a, b));
+            
+            return mcm;
+            
+            
+        }
+        console.log(smallestCommons([1, 5]));
+        
+        </script>
+</head>
+
+<body>
+
+</body>
+
+</html>
