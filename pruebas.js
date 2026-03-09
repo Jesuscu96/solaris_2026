@@ -1,20 +1,17 @@
 function smallestCommons(arr) {
+    
+    const [min, max] = [...arr].sort((a,b) => a - b);
 
-    const arrSort = [...arr].sort((a, b) => a - b);
-    const mcd = (a, b) => {
-        if (b <= 0) return a;
-        const division = a % b;
-        return mcd(b, division);
-    }
+    const gcd = (a, b) => b === 0 ? a : gcd(b, a % b);
 
-    const mcm = (a, b) => (a * b) / mcd(a, b);
+    const lcm = (a, b) => (a * b) / gcd(a, b);
 
-    const numbersD = Array.from(
-        { length: arrSort[0] - arrSort[1] + 1 },
-        (_, i) => arrSort[0] + i
+    const range = Array.from(
+        {length: max - min + 1},
+        (_,i) => min + i
     );
 
-    return numbersD.reduce((acc, val) => mcm(acc, val));
+    return range.reduce((acc, val) => lcm(acc, val));
 }
 
-console.log(smallestCommons([1, 5])); 
+console.log(smallestCommons([1,5])); 

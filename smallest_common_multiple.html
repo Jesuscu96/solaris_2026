@@ -8,27 +8,30 @@
     <script>
 
         function smallestCommons(arr) {
-            const arrOrder = [...arr].sort((a,b) => a - b);
-            
-            const a = arrOrder[0];
-            const b = arrOrder[1];
-            
-            const mcd = (a , b) => {
+            const arrOrder = [...arr].sort((a, b) => a - b);
+
+
+
+            const mcd = (a, b) => {
                 if (a <= 0) return b;
                 if (b <= 0) return a;
                 const division = a % b;
                 return mcd(b, division);
             }
-            const mcm = a * (b / (mcd(a, b)));
-            console.log(mcd(a, b));
-            
-            return mcm;
-            
-            
+            const mcm = (a, b) => (a * b) / mcd(a, b);
+
+            const numbersD = Array.from(
+                { length: arrOrder[1] - arrOrder[0] + 1 },
+                (_, i) => arrOrder[0] + i
+            );
+
+            return numbersD.reduce((acc, val) => mcm(acc, val));
+
+
         }
         console.log(smallestCommons([1, 5]));
-        
-        </script>
+
+    </script>
 </head>
 
 <body>

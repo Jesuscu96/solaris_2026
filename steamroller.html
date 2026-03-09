@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Steamroller</title>
+    <script>
+        function steamrollArray(arr) {
+            //return arr.flat(Infinity);
+            
+            
+            const concatArr = (arr, acc = [...acc], indi) => {
+                console.log(indi);
+
+
+                if (Array.isArray(arr[indi]) && arr.length >= indi) {
+                    acc = [...acc, ...arr[indi]];
+                    indi++;
+                    /* if (Array.isArray(acc[indi])) {
+                        acc.concat(acc[indi]);
+                        indi++;
+                        return concatArr(arr, acc, indi);
+                    } */
+                    
+                    return concatArr(arr, acc, indi);
+                }
+                /* else if (Array.isArray(acc[indi -1])){
+                    
+                } */
+
+                else if (arr.length > indi) {
+                    //console.log([arr[indi]]);
+                    acc = [...acc, arr[indi]];
+                    indi++;
+
+
+                    return concatArr(arr, acc, indi);
+                }
+                return acc;
+
+
+            };
+            console.log(concatArr(arr, [], 0));
+            const steamroller = concatArr(arr, [], 0);
+            
+            console.log(concatArr(steamroller, [], 0));
+            
+
+            //console.log(Array.isArray(arr[0]));
+
+
+            /* const concatArr1 = arr.reduce((acc, elem, indi) => {
+                if(Array.isArray(elem)) return acc = [...acc, ...elem];
+                return acc = [...acc, elem];
+            }, [])
+            return concatArr; */
+        }
+
+
+        console.log(steamrollArray([1, [2], [3, [[4]]]]));
+
+    </script>
+</head>
+
+<body>
+
+</body>
+
+</html>
