@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Caesars Cipher</title>
+    <script>
+        function rot13(str) {
+            const alphabet = {
+                "A": "D",
+                "B": "E",
+                "C": "F",
+                "D": "G",
+                "E": "H",
+                "F": "I",
+                "G": "J",
+                "H": "K",
+                "I": "L",
+                "J": "M",
+                "K": "N",
+                "L": "O",
+                "M": "P",
+                "N": "Q",
+                "O": "R",
+                "P": "S",
+                "Q": "T",
+                "R": "Y",
+                "S": "V",
+                "T": "W",
+                "U": "X",
+                "V": "Y",
+                "W": "Z",
+                "X": "A",
+                "Y": "B",
+                "Z": "C",
+            }
+            const regex = /[A-Z]/;
+            const strArray = str.split("");
+            const strTranslated = strArray.reduce((acc, elem) => {
+                if(regex.test(elem)) return acc += alphabet[elem];
+                return acc += elem;
+            }, "")
+            return strTranslated;
+        }
+      
+        console.log(rot13("SERR PBQR PNZC"));
+        
+    </script>
+</head>
+
+<body>
+
+</body>
+
+</html>

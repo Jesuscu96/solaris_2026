@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Make a Person</title>
+    <script>
+        const Person = function (first, last) {
+            let firstName = first;
+            let lastName = last;
+            this.getFirstName = function () {
+                return firstName;
+            };
+            this.getLastName = function () {
+                return lastName;
+            };
+            this.getFullName = function () {
+                return firstName + " " + lastName;
+            };
+            this.setFirstName = function (first) {
+                firstName = first;
+            };
+            this.setLastName = function (last) {
+                lastName = last;
+            };
+            this.setFullName = function (first, last) {
+                firstName = first;
+                lastName = last;
+            };
+        };
+
+        const newPerson = new Person("Haskell", "Curry");
+        console.log(newPerson.getFullName());
+
+    </script>
+</head>
+
+<body>
+
+</body>
+
+</html>
