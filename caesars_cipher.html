@@ -6,44 +6,39 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Caesars Cipher</title>
     <script>
+        /* const array = String.fromCodePoint(90);
+        console.log(array); */
         function rot13(str) {
-            const alphabet = {
-                "A": "D",
-                "B": "E",
-                "C": "F",
-                "D": "G",
-                "E": "H",
-                "F": "I",
-                "G": "J",
-                "H": "K",
-                "I": "L",
-                "J": "M",
-                "K": "N",
-                "L": "O",
-                "M": "P",
-                "N": "Q",
-                "O": "R",
-                "P": "S",
-                "Q": "T",
-                "R": "Y",
-                "S": "V",
-                "T": "W",
-                "U": "X",
-                "V": "Y",
-                "W": "Z",
-                "X": "A",
-                "Y": "B",
-                "Z": "C",
-            }
+            
             const regex = /[A-Z]/;
             const strArray = str.split("");
-            const strTranslated = strArray.reduce((acc, elem) => {
-                if(regex.test(elem)) return acc += alphabet[elem];
+                       
+            const strTranslatedPart2 = (numLetter,  numSubt) => {
+                if(numLetter < 90 && numSubt > 0 ) {
+                    numLetter++;
+                    numSubt--;
+                    return strTranslatedPart2(numLetter,  numSubt);
+                }
+                else if (numSubt > 0) {
+                    numSubt--;
+                    return strTranslatedPart2(65,  numSubt);
+                }
+                else if (numSubt === 0) {                    
+                    return String.fromCodePoint(numLetter);
+                }
+            }
+            const strTranslatedPart1 = strArray.reduce((acc, elem) => {
+                if(regex.test(elem)) {
+                    const letter = strTranslatedPart2(elem.charCodeAt(0),  13);
+                    return acc += letter;
+                }
                 return acc += elem;
+                
             }, "")
-            return strTranslated;
+            return strTranslatedPart1;
         }
-      
+        
+        
         console.log(rot13("SERR PBQR PNZC"));
         
     </script>

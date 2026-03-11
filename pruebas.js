@@ -1,17 +1,18 @@
-function smallestCommons(arr) {
-    
-    const [min, max] = [...arr].sort((a,b) => a - b);
+/* function rot13(str) {
+  return str.replace(/[A-Z]/g, c =>
+    String.fromCharCode((c.charCodeAt(0) - 65 + 13) % 26 + 65)
+  );
+} */
+/* 
+charCodeAt(0) obtiene el código ASCII de la letra.
 
-    const gcd = (a, b) => b === 0 ? a : gcd(b, a % b);
+code - 65 convierte A-Z a 0-25.
 
-    const lcm = (a, b) => (a * b) / gcd(a, b);
++13 aplica el desplazamiento ROT13.
 
-    const range = Array.from(
-        {length: max - min + 1},
-        (_,i) => min + i
-    );
+%26 evita salir del alfabeto.
 
-    return range.reduce((acc, val) => lcm(acc, val));
-}
++65 vuelve al rango ASCII de A-Z.
 
-console.log(smallestCommons([1,5])); 
+fromCharCode convierte el número nuevamente a letra.
+*/
