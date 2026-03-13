@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cash Register</title>
+    <script>
+        function checkCashRegister(price, cash, cid) {
+            const totalCid = Number((cid.reduce((acc, [e0, e1]) => acc + e1, 0)).toFixed(2));
+            const typeOfCurrenzy = [["ONE HUNDRED", 100], ["TWENTY", 20], ["TEN", 10], ["FIVE", 5], ["ONE", 1], ["QUARTER", 0.25], ["DIME", 0.1], ["NICKEL", 0.05], ["PENNY", 0.01]];
+            const cidReverse = [...cid].reverse();
+            const changeToOwe = cash - price;
+
+
+            function isThereChange(moneyInCahsRegister, change, total, currency) {
+                //The first currency allows for change.
+                const step1 = currency.find(([con, val]) => val <= change)
+                //The index of the first currency allows change.
+                const step2 = moneyInCahsRegister.findIndex(con => con[0] === step1[0]);
+                // I reduce the array according to step 2
+                const step3 = moneyInCahsRegister.slice(step2) ;
+                //the total amount of money in the cash register would allow for change
+                const step4 = Number((step3.reduce((acc, [e0, e1]) => acc + e1, 0)).toFixed(2));
+                return step4;
+            };
+            const status = isThereChange(cidReverse, changeToOwe, totalCid, typeOfCurrenzy);
+           
+
+            if (status > changeToOwe) {
+                const returned = { status: "OPEN", change: changeReturned };
+                return returned;
+            } else if (totalCid === changeToOwe) {
+                const returned = { status: "CLOSED", change: changeClean.reverse() }
+                return returned
+            } else if (status < changeToOwe) {
+                const returned = { status: "INSUFFICIENT_FUNDS", change: [] };
+                return returned;
+            }
+        
+        }
+        checkCashRegister(19.5, 20, [["PENNY", 0.01], ["NICKEL", 0], ["DIME", 0], ["QUARTER", 0], ["ONE", 0], ["FIVE", 0], ["TEN", 0], ["TWENTY", 0], ["ONE HUNDRED", 0]]);
+
+
+
+
+    </script>
+</head>
+
+<body>
+
+</body>
+
+</html>

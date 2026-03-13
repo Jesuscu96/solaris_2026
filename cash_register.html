@@ -8,7 +8,7 @@
     <script>
         function checkCashRegister(price, cash, cid) {
             const totalCid = Number((cid.reduce((acc, [e0, e1]) => acc + e1, 0)).toFixed(2));
-            const typeOfCoin = [["ONE HUNDRED", 100], ["TWENTY", 20], ["TEN", 10], ["FIVE", 5], ["ONE", 1], ["QUARTER", 0.25], ["DIME", 0.1], ["NICKEL", 0.05], ["PENNY", 0.01]];
+            const typeOfCurrenzy = [["ONE HUNDRED", 100], ["TWENTY", 20], ["TEN", 10], ["FIVE", 5], ["ONE", 1], ["QUARTER", 0.25], ["DIME", 0.1], ["NICKEL", 0.05], ["PENNY", 0.01]];
             const cidReverse = [...cid].reverse();
             const changeToOwe = cash - price;
 
@@ -24,13 +24,13 @@
                 const step4 = Number((step3.reduce((acc, [e0, e1]) => acc + e1, 0)).toFixed(2));
                 return step4;
             };
-            const status = isThereChange(cidReverse, changeToOwe, totalCid, typeOfCoin);
+            const status = isThereChange(cidReverse, changeToOwe, totalCid, typeOfCurrenzy);
 
 
 
             function change(change, cidCopy = cidReverse) {
                 let newChange = parseFloat(change.toFixed(2));
-                const filterByCurrencyType = typeOfCoin.reduce((acc, [currency, value]) => {
+                const filterByCurrencyType = typeOfCurrenzy.reduce((acc, [currency, value]) => {
                     if (value >= newChange) {
                         return [...acc, [currency, 0]];
                     }
@@ -92,19 +92,15 @@
 
                 if (status > changeToOwe) {
                     const returned = { status: "OPEN", change: changeReturned };
-                    console.log(returned);
                     return returned;
                 } else if (totalCid === changeToOwe) {
                     const returned = { status: "CLOSED", change: changeClean.reverse() }
-                    console.log(returned)
                     return returned
                 } else if (status < changeToOwe) {
                     const returned = { status: "INSUFFICIENT_FUNDS", change: [] };
-                    console.log(returned);
                     return returned;
                 }
             } else if (typeof changeRedundant === "object") {
-                console.log(changeRedundant);
                 return changeRedundant;
             }
         }
