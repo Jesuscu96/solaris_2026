@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cash Register</title>
+    <script>
+        function checkCashRegister(price, cash, cid) {
+            const totalCid = Number((cid.reduce((acc, [e0, e1]) => acc + e1, 0)).toFixed(2));
+            const typeOfCoin = [["ONE HUNDRED", 100], ["TWENTY", 20], ["TEN", 10], ["FIVE", 5], ["ONE", 1], ["QUARTER", 0.25], ["DIME", 0.1], ["NICKEL", 0.05], ["PENNY", 0.01]];
+            const cidReverse = [...cid].reverse();
+            const changeToOwe = cash - price;
+
+
+            function isThereChange(moneyInCahsRegister, change, total, currency) {
+                //The first currency allows for change.
+                const step1 = currency.find(([con, val]) => val <= change)
+                //The index of the first currency allows change.
+                const step2 = moneyInCahsRegister.findIndex(con => con[0] === step1[0]);
+                // I reduce the array according to step 2
+                const step3 = moneyInCahsRegister.slice(step2) ;
+                //the total amount of money in the cash register would allow for change
+                const step4 = Number((step3.reduce((acc, [e0, e1]) => acc + e1, 0)).toFixed(2));
+                return step4;
+            };
+            const status = isThereChange(cidReverse, changeToOwe, totalCid, typeOfCoin);
+
+
+
+            function change(change, cidCopy = cidReverse) {
+                let newChange = parseFloat(change.toFixed(2));
+                const filterByCurrencyType = typeOfCoin.reduce((acc, [currency, value]) => {
+                    if (value >= newChange) {
+                        return [...acc, [currency, 0]];
+                    }
+                    else if (value <= newChange) {
+                        const filtroPorCaja = (acum, [nameCurrency, cantidad]) => {
+                            if (currency === nameCurrency && cantidad >= value && value <= newChange) {
+                                const nuevoRestaCaja = cantidad - value;
+                                const restaCaja = parseFloat(nuevoRestaCaja.toFixed(2));
+                                const nuevoChangeResta = newChange - value;
+                                newChange = parseFloat(nuevoChangeResta.toFixed(2));
+                                // Repeat the evaluation for the same currency with the new copy
+                                if (currency === nameCurrency && restaCaja > 0 && value <= newChange) {
+                                    return filtroPorCaja([...acum, [currency, value, newChange]], [nameCurrency, restaCaja]);
+                                }
+                                return [...acum, [currency, value, newChange]];
+                            }
+                            return acum;
+                        };
+                        const discountCash = cidCopy.reduce((acum, elem) => {
+                            return filtroPorCaja(acum, elem);
+                        }, []);
+                        return [...acc, ...discountCash];
+                    }
+                    return acc;
+                }, []);
+                if (newChange > 0) {
+                    return { status: "INSUFFICIENT_FUNDS", change: [] };
+                } 
+                return filterByCurrencyType;
+                
+            }
+
+            const changeRedundant = change(changeToOwe);
+            if (Array.isArray(changeRedundant)) {
+
+                const changeWithoutRedundancy = (change, caja, changeToOwe) => {
+                    const compare = caja.reduce((acc, [currency, value]) => {
+                        const filter = change.reduce((acum, [nameCurrency, nameValue]) => {
+
+                            if (currency === nameCurrency) {
+                                const sumValue = (acum + nameValue);
+                                const newValue = parseFloat(sumValue.toFixed(2));
+                                acum = newValue;
+                                return acum;
+                            }
+                            return acum;
+
+                        }, 0);
+                        return [...acc, [currency, filter]];
+                    }, []);
+                    return compare;
+                };
+
+                changeWithoutRedundancy(changeRedundant, cidReverse, changeToOwe);
+                const changeClean = changeWithoutRedundancy(changeRedundant, cidReverse, changeToOwe);
+                const changeReturned = changeClean.filter(([cun, amou]) => changeToOwe >= amou && amou > 0);
+
+
+
+                if (status > changeToOwe) {
+                    const returned = { status: "OPEN", change: changeReturned };
+                    console.log(returned);
+                    return returned;
+                } else if (totalCid === changeToOwe) {
+                    const returned = { status: "CLOSED", change: changeClean.reverse() }
+                    console.log(returned)
+                    return returned
+                } else if (status < changeToOwe) {
+                    const returned = { status: "INSUFFICIENT_FUNDS", change: [] };
+                    console.log(returned);
+                    return returned;
+                }
+            } else if (typeof changeRedundant === "object") {
+                console.log(changeRedundant);
+                return changeRedundant;
+            }
+        }
+        checkCashRegister(19.5, 20, [["PENNY", 0.01], ["NICKEL", 0], ["DIME", 0], ["QUARTER", 0], ["ONE", 0], ["FIVE", 0], ["TEN", 0], ["TWENTY", 0], ["ONE HUNDRED", 0]]);
+
+
+
+
+    </script>
+</head>
+
+<body>
+
+</body>
+
+</html>
