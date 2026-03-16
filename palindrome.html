@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Palindrome</title>
+    <script>
+        function palindrome(str) {
+            const regex = /^[a-zA-Z0-9]+$/;
+            const strArray = str.toLowerCase().split("");
+            
+            const strOnlyLetters = strArray.reduce((acc, elem) => {
+                if(regex.test(elem)) return acc + elem
+                return acc;
+            }, "")
+            const strOnlyLettersArray = strOnlyLetters.split("");
+            const strOnlyLettersReverse = [...strOnlyLettersArray].reverse().join("");
+            console.log(strOnlyLettersReverse);
+            
+            console.log( strOnlyLetters + "  " + strOnlyLettersReverse);
+            
+            if (strOnlyLetters === strOnlyLettersReverse) return true;
+            return false;         
+            
+
+            
+            
+        }
+
+        palindrome("1 eye for of 1 eye.");
+        console.log( palindrome("1 eye for of 1 eye."));
+        
+    </script>
+</head>
+
+<body>
+
+</body>
+
+</html>
