@@ -7,12 +7,73 @@
     <title>Telephone Number Validator</title>
     <script>
         function telephoneCheck(str) {
-            const newStr = str.split("").join(" ").join("");
-            console.log(newStr);
+
+            const strWithoutSpacesHyphen = str
+                .split("")
+                .reduce((acc, v) => v !== " " && v !== "-" ? acc + v : acc, "");
+            //
+            const numbersOfparentheses = strWithoutSpacesHyphen
+                .split("")
+                .filter(v => v == "(" || v == ")");
+
+            const strWithoutSpacesHyphenParenthess = strWithoutSpacesHyphen
+                .split("")
+                .filter(v => v !== "(" && v !== ")")
+                .join("");
+
+            const isNumber = strWithoutSpacesHyphenParenthess
+                .split("")
+                .filter(v => isNaN(v));
+
+            const numberHyphens = str
+                .split("")
+                .filter(v => v == "-");
+            
+            //validate parentheses
+            if (numbersOfparentheses.length !== 2 && numbersOfparentheses.length !== 0 || (str[0] == "(" && str[str.length - 1] == ")")) return false;
+            
+            //validate the length of the number
+            if ((strWithoutSpacesHyphenParenthess[0] != 1 && strWithoutSpacesHyphenParenthess.length == 11) || (strWithoutSpacesHyphenParenthess[0] == 1 && strWithoutSpacesHyphenParenthess.length == 10) || strWithoutSpacesHyphenParenthess.length <= 9 || strWithoutSpacesHyphenParenthess.length >= 12) return false;
+            
+            //validate special characters and hyphens
+            if (isNumber.length > 0 || numberHyphens.length >= 3 || str[0] == "-" ) return false;
+
+            return true;
 
         }
+        console.log(telephoneCheck("1 (555) 555-5555"));
 
-        telephoneCheck("1 (555) 555-5555");
+        //telephoneCheck("1 (555) 555-5555");
+
+
+        /* function telephoneCheck(str) {
+            const strWithoutSpaces = str
+                .split("")
+                .reduce((acc, v) => v !== " " && v !== "-" ? acc + v : acc, "");
+
+            const step1 = strWithoutSpaces
+                .split("")
+                .filter(v => v == "(" || v == ")");
+
+            const step2 = strWithoutSpaces
+                .split("")
+                .filter(v => v !== "(" && v !== ")")
+                .join("");
+
+            const step3 = step2
+                .split("")
+                .filter(v => isNaN(v));
+
+            const step4 = str
+                .split("")
+                .filter(v => v == "-");
+
+            if (step1.length !== 2 && step1.length !== 0 || (str[0] == "(" && str[str.length - 1] == ")")) return false;
+            if ((step2[0] != 1 && step2.length == 11) || (step2[0] == 1 && step2.length == 10) || step2.length <= 9 || step2.length >= 12) return false;
+            if (step3.length > 0 || step4.length >= 3 || str[0] == "-") return false;
+
+            return true;
+        } */
     </script>
 </head>
 
